@@ -1,0 +1,9 @@
+# React ignores
+react/musify/node_modules
+react/musify/dist
+
+# Express ignores
+express/node_modules
+express/.env
+express/dist
+express/prisma/migrations
