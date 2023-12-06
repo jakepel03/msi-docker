@@ -13,7 +13,7 @@ import cron from "node-cron";
 
 // initialize server
 const server = express();
-const port = Number(process.env.EXPRESS_PORT);
+const port = Number(process.env.PORT);
 const upload = multer();
 server.use(bodyParser.json());
 server.use(cookieParser());
