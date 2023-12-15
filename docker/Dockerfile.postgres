@@ -1,34 +1,26 @@
-FROM postgres:14
+FROM node:latest AS builder
 
-RUN sudo -u postgres psql -c "CREATE DATABASE musifydb;" \
- && sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'super_strong_password_123';"
+ENV DATABASE_URL=postgres://postgres:temp_pwd@localhost:5432/temp
 
-RUN sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = 'postgres'/g" /etc/postgresql/14/main/postgresql.conf \
-    && echo "host    all             postgres   express/28               md5" >> /etc/postgresql/14/main/pg_hba.conf
+WORKDIR /builder
 
-RUN service postgresql restart
+COPY express/prisma/schema.prisma .
 
-RUN npm i -g prisma
+RUN apt-get update -y \
+  && apt-get install postgresql -y
 
-WORKDIR /app
+RUN service postgresql start \
+  && su - postgres -c "psql -c 'CREATE DATABASE temp;'" \
+  && su - postgres -c "psql -c 'ALTER USER postgres WITH PASSWORD '\''temp_pwd'\'';'" \
+  && npm i prisma \
+  && npx prisma migrate dev --create-only --skip-generate --name init
 
-COPY ../express/prisma/schema.prisma ./
+FROM postgres:latest
 
-RUN npx prisma migrate dev --name init \
- && npx prisma migrate deploy
+ENV POSTGRES_DB=musifydb \
+  POSTGRES_USER=topgmiha \
+  POSTGRES_PASSWORD=topgmiha
 
-RUN sudo -u postgres psql -d musifydb -c \
-    "CREATE OR REPLACE FUNCTION music_file_deleted_trigger() \
-    RETURNS TRIGGER AS \$\$ \
-    BEGIN \
-      INSERT INTO deleted_music_files (mf_id, path) \
-      VALUES (OLD.mf_id, OLD.path); \
-      RETURN OLD; \
-    END; \
-    \$\$ LANGUAGE plpgsql;"
+COPY --from=builder /builder/migrations/*_init/migration.sql /docker-entrypoint-initdb.d/
 
-RUN sudo -u postgres psql -d musifydb -c \
-    "CREATE TRIGGER music_file_deleted \
-    AFTER DELETE ON music_files \
-    FOR EACH ROW \
-    EXECUTE FUNCTION music_file_deleted_trigger();"
+EXPOSE 5432
