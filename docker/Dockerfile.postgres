@@ -7,9 +7,8 @@ WORKDIR /builder
 COPY express/prisma/schema.prisma .
 
 RUN apt-get update -y \
-  && apt-get install postgresql -y
-
-RUN service postgresql start \
+  && apt-get install postgresql -y \
+  && service postgresql start \
   && su - postgres -c "psql -c 'CREATE DATABASE temp;'" \
   && su - postgres -c "psql -c 'ALTER USER postgres WITH PASSWORD '\''temp_pwd'\'';'" \
   && npm i prisma \
@@ -22,5 +21,6 @@ ENV POSTGRES_DB=musifydb \
   POSTGRES_PASSWORD=topgmiha
 
 COPY --from=builder /builder/migrations/*_init/migration.sql /docker-entrypoint-initdb.d/
+COPY docker/triggers.sql /docker-entrypoint-initdb.d/
 
 EXPOSE 5432
