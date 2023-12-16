@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.postgres
+    environment:
+      DATABASE_URL: postgres://postgres:temp_pwd@localhost:5432/temp
+      POSTGRES_DB: musifydb
+      POSTGRES_USER: ${POSTGRES_USER:-default_value}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-default_value}
+    ports:
+      - "5432:5432"
+    networks:
+      - musify_network
+
+  express:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.express
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-default_value}:${POSTGRES_PASSWORD:-topgmiha}@postgres:5432/musifydb
+      NGINX_URL: nginx
+      JWT_SECRET: ${JWT_SECRET:-default_value}
+      EMAIL: musifymail@gmail.com
+      EMAIL_PWD: ewsi lsqe shqf smcf
+      MINIO_URL: minio
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-default_value}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-default_value}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - musify_network
+
+networks:
+  musify_network:
+    driver: bridge
