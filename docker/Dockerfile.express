@@ -8,16 +8,6 @@ RUN ["npm", "install"]
 
 COPY . .
 
-ENV PORT=3000 \
-  DATABASE_URL=postgresql://postgres:super_strong_password_123@postgres:5432/musifydb \
-  NGINX_URL=nginx \
-  JWT_SECRET=fF54Dwh7OU992+TTcbIZEO5s6pmk5hD5L/UZWxclE8o= \
-  EMAIL=musifymail@gmail.com \
-  EMAIL_PWD="ewsi lsqe shqf smcf" \
-  MINIO_URL=minio \
-  MINIO_ROOT_USER=minio_gazda \
-  MINIO_ROOT_PASSWORD=super_strong_password_123
-
 RUN ["npx", "prisma", "generate", "&&", "npm", "run", "build"]
 
 EXPOSE 3000

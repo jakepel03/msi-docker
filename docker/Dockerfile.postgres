@@ -1,7 +1,5 @@
 FROM node:latest AS builder
 
-ENV DATABASE_URL=postgres://postgres:temp_pwd@localhost:5432/temp
-
 WORKDIR /builder
 
 COPY express/prisma/schema.prisma .
@@ -15,10 +13,6 @@ RUN apt-get update -y \
   && npx prisma migrate dev --create-only --skip-generate --name init
 
 FROM postgres:latest
-
-ENV POSTGRES_DB=musifydb \
-  POSTGRES_USER=topgmiha \
-  POSTGRES_PASSWORD=topgmiha
 
 COPY --from=builder /builder/migrations/*_init/migration.sql /docker-entrypoint-initdb.d/
 COPY docker/triggers.sql /docker-entrypoint-initdb.d/
