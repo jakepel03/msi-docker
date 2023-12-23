@@ -1,5 +1,7 @@
 FROM node:latest AS builder
 
+ENV DATABASE_URL=postgres://postgres:temp_pwd@localhost:5432/temp
+
 WORKDIR /builder
 
 COPY express/prisma/schema.prisma .

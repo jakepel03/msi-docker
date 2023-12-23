@@ -6,21 +6,19 @@ services:
       context: .
       dockerfile: docker/Dockerfile.postgres
     environment:
-      DATABASE_URL: postgres://postgres:temp_pwd@localhost:5432/temp
       POSTGRES_DB: musifydb
       POSTGRES_USER: ${POSTGRES_USER:-default_value}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-default_value}
-    ports:
-      - "5432:5432"
-    networks:
-      - musify_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   express:
     build:
       context: .
       dockerfile: docker/Dockerfile.express
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-default_value}:${POSTGRES_PASSWORD:-topgmiha}@postgres:5432/musifydb
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-default_value}:${POSTGRES_PASSWORD:-default_value}@postgres:5432/musifydb
       NGINX_URL: nginx
       JWT_SECRET: ${JWT_SECRET:-default_value}
       EMAIL: musifymail@gmail.com
@@ -32,9 +30,6 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
-    networks:
-      - musify_network
 
-networks:
-  musify_network:
-    driver: bridge
+volumes:
+  postgres_data:

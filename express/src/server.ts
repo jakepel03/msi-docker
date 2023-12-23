@@ -294,7 +294,7 @@ server.get(
           where: { userId: session.user.userId },
         }),
       ]);
-      const [data, totalCount] =  result;
+      const [data, totalCount] = result;
       return res.status(200).json({
         message: "Files retrieved successfully",
         data,
@@ -323,7 +323,7 @@ server.post(
         path,
         file.buffer,
         file.size,
-        async function (err) {
+        async function(err) {
           if (err) {
             return res.status(500).json({ error: "File upload failed" });
           }
@@ -411,14 +411,14 @@ cron.schedule("* * * * *", async () => {
     for (const file of deleted) {
       const filePath = file.path;
 
-      minioClient.removeObject('music-files', filePath, async function(err : string) {
+      minioClient.removeObject('music-files', filePath, async function(err: string) {
         if (err) {
           console.log(err);
           throw new Error(err);
         }
       })
     }
-  } catch (err) {}
+  } catch (err) { }
 });
 
 function createSession(res: Response, user: User) {
