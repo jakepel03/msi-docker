@@ -1,6 +1,6 @@
-FROM node:21
+FROM node:20 AS builder
 
-WORKDIR /app
+WORKDIR /builder
 
 COPY express/ .
 
@@ -8,6 +8,12 @@ RUN npm install \
   && npx prisma generate \
   && npm run build
 
+FROM gcr.io/distroless/nodejs20
+
+WORKDIR /musify
+
+COPY --from=builder /builder .
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["dist/server.js"]
