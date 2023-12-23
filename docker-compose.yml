@@ -24,8 +24,8 @@ services:
       EMAIL: musifymail@gmail.com
       EMAIL_PWD: ewsi lsqe shqf smcf
       MINIO_URL: minio
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-default_value}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-default_value}
+      MINIO_ROOT_USER: ${MINIO_USER:-default_value}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-default_value}
     ports:
       - "3000:3000"
     depends_on:

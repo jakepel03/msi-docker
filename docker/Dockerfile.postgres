@@ -1,4 +1,4 @@
-FROM node:latest AS builder
+FROM node:20 AS builder
 
 ENV DATABASE_URL=postgres://postgres:temp_pwd@localhost:5432/temp
 
@@ -14,7 +14,7 @@ RUN apt-get update -y \
   && npm i prisma \
   && npx prisma migrate dev --create-only --skip-generate --name init
 
-FROM postgres:latest
+FROM postgres:16-alpine
 
 COPY --from=builder /builder/migrations/*_init/migration.sql /docker-entrypoint-initdb.d/
 COPY docker/triggers.sql /docker-entrypoint-initdb.d/
