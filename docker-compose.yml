@@ -26,7 +26,14 @@ services:
     depends_on:
       - postgres
 
-  express:
+  minioclient:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.minioclient
+    depends_on:
+      - minio
+
+  express: 
     build:
       context: .
       dockerfile: docker/Dockerfile.express
