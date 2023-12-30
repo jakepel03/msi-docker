@@ -7,7 +7,7 @@ COPY react/musify .
 RUN npm install \
     && npm run build
 
-FROM nginx
+FROM nginx:alpine
 
 COPY --from=builder /builder/dist/ /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
