@@ -23,8 +23,6 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
     volumes:
       - minio_storage:/data
-    depends_on:
-      - postgres
 
   minioclient:
     build:
@@ -36,7 +34,7 @@ services:
     depends_on:
       - minio
 
-  express: 
+  express:
     build:
       context: .
       dockerfile: docker/Dockerfile.express
@@ -53,6 +51,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
+      - postgres
       - minio
 
   nginx:
@@ -62,7 +61,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - minioclient
+      - express
 
 volumes:
   postgres_data:
