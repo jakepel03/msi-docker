@@ -55,6 +55,15 @@ services:
     depends_on:
       - minio
 
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - minioclient
+
 volumes:
   postgres_data:
   minio_storage:
