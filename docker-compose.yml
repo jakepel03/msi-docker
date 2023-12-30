@@ -43,7 +43,7 @@ services:
     environment:
       PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-default_value}:${POSTGRES_PASSWORD:-default_value}@postgres:5432/musifydb
-      NGINX_URL: nginx
+      NGINX_URL: http://localhost
       JWT_SECRET: ${JWT_SECRET:-default_value}
       EMAIL: musifymail@gmail.com
       EMAIL_PWD: ewsi lsqe shqf smcf
