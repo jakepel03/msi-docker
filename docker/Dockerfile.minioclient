@@ -1,7 +1,5 @@
 FROM minio/mc
 
 ENV MINIO_SERVER_ENDPOINT http://minio:9000
-ENV MINIO_ACCESS_KEY minioadmin
-ENV MINIO_SECRET_KEY minioadmin
 
-ENTRYPOINT ["sh", "-c", "mc alias set myminio $MINIO_SERVER_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY && mc mb myminio/music-files && exec sh"]
+ENTRYPOINT ["sh", "-c", "mc alias set myminio $MINIO_SERVER_ENDPOINT $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD && mc mb myminio/music-files"]
