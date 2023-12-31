@@ -2,14 +2,14 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
-    paths: [ "react/**" ]
+    branches: ["master"]
+    paths: ["react/**"]
   pull_request:
-    branches: [ "master" ]
-    paths: [ "react/**" ]
+    branches: ["master"]
+    paths: ["react/**"]
 
 env:
-  IMAGE_TAG: mvintar/musify-frontend:latest
+  IMAGE_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/musify-frontend:latest
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build Docker image
         run: docker build --tag "${IMAGE_TAG}" .
@@ -25,7 +25,7 @@ jobs:
       - name: Save Docker image
         run: docker save --output image.tar "${IMAGE_TAG}"
       - name: Upload Docker image
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker-image
           path: image.tar
@@ -36,11 +36,11 @@ jobs:
 
     needs: build
 
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Download Docker image
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: docker-image
       - name: Load Docker image
