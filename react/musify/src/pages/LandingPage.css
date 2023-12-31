@@ -30,7 +30,7 @@ button {
 
 .content-container {
   height: 100%;
-  background-image: url("../assets/landing-page-background.jpg");
+  /*background-image: url("../assets/landing-page-background.jpg");*/
   background-color: rgba(0, 0, 0, 0.1);
   background-blend-mode: darken;
   background-size: cover;
