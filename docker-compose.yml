@@ -55,9 +55,7 @@ services:
       - minio
 
   nginx:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.nginx
+    image: mvintar/musify-frontend:latest
     ports:
       - "80:80"
     depends_on:
