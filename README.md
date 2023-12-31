@@ -13,7 +13,7 @@ The project consists of the following key components:
 
 1. **Docker Compose Configuration:**
    - The `docker-compose.yml` file defines the services and their interactions.
-   - There are 5 different services implemented.
+   - There are 5 different services implemented (nginx, express, postgress, minio (Minio server) and minioclient).
 
 2. **Docker Volumes:**
    - Volumes are used for Minio file storage and database storage, ensuring data persistence between container restarts.
