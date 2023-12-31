@@ -29,7 +29,6 @@ jobs:
         with:
           name: docker-image
           path: image.tar
-          retention-days: 1
 
   push:
     name: Docker push
