@@ -65,4 +65,5 @@ jobs:
           DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
         run: |
           echo "${DOCKERHUB_PASS}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-          docker push "${IMAGE_TAG%:*}:${{ steps.meta.outputs.tags }}"
+          docker push "${DOCKERHUB_USERNAME}/musify-frontend:${{ steps.meta.outputs.tags }}"
+
