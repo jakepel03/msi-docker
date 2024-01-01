@@ -11,8 +11,7 @@ on:
     paths: ["react/**"]
 
 env:
-  IMAGE_VERSION: 1.0.0
-  IMAGE_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/musify-frontend:1.0.0
+  IMAGE_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/musify-frontend:latest
 
 jobs:
   build:
@@ -48,19 +47,6 @@ jobs:
           name: docker-image
       - name: Load Docker image
         run: docker load --input image.tar
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: ${IMAGE_TAG}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
 
       - name: Create GitHub Release
         id: create_release
