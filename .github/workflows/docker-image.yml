@@ -10,7 +10,7 @@ on:
 
 env:
   IMAGE_VERSION: 1.0.0
-  IMAGE_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/musify-frontend:${{ env.IMAGE_VERSION }}
+  IMAGE_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/musify-frontend:${{ IMAGE_VERSION }}
 
 jobs:
   build:
