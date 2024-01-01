@@ -39,21 +39,32 @@ Before proceeding with the steps below, ensure that you have Docker installed on
     ```bash
     cd msi-docker
     ```
+    
+   ![Screenshot from 2024-01-01 20-00-57](https://github.com/jakepel03/msi-docker/assets/69330734/907ac77a-26f9-4c6b-aa37-5fd662760573)
 
+    
 3. Run the following command to launch the VM:
 
     ```bash
-    docker compose up -d
+    docker compose up -d!
     ```
+   ![Screenshot from 2024-01-01 20-04-05](https://github.com/jakepel03/msi-docker/assets/69330734/2e8a10a5-d2b2-410f-bf3b-326d7615f0b2)
 
     Wait until containers are started.
 
+
 4. Once the containers are running, you can access the website on http://localhost
 
-5. If you want to stop and remove the containers, run:
+
+   ![Screenshot from 2024-01-01 20-04-31](https://github.com/jakepel03/msi-docker/assets/69330734/4d50b13a-0f59-4f80-a940-aa04352bf65e)
+   
+   ![Screenshot from 2024-01-01 20-05-11](https://github.com/jakepel03/msi-docker/assets/69330734/08db1a05-2457-45b1-a3de-56e591f24b65)
+   
+6. If you want to stop and remove the containers, run:
 
     ```bash
     docker compose down
     ```
     (add `-v` tag if you also want to remove volumes)
+   ![image](https://github.com/jakepel03/msi-docker/assets/69330734/dff33a29-a195-41c1-a763-2b541dff5120)
 
