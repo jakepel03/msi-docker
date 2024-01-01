@@ -57,6 +57,7 @@ jobs:
   create_release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
+    needs: push
     if: startsWith(github.event.ref, 'refs/tags/')
     steps:
       - name: Create GitHub Release
