@@ -46,7 +46,7 @@ Before proceeding with the steps below, ensure that you have Docker installed on
 3. Run the following command to launch the VM:
 
     ```bash
-    docker compose up -d!
+    docker compose up -d
     ```
    ![Screenshot from 2024-01-01 20-04-05](https://github.com/jakepel03/msi-docker/assets/69330734/2e8a10a5-d2b2-410f-bf3b-326d7615f0b2)
 
