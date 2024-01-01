@@ -66,6 +66,8 @@ jobs:
         with:
           tag_name: "${IMAGE_VERSION}"
           release_name: Release "${IMAGE_VERSION}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Docker image
         env:
