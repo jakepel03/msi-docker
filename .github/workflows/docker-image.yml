@@ -62,7 +62,7 @@ jobs:
 
       - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v3
+        uses: actions/create-release@v1
         with:
           tag_name: "${IMAGE_VERSION}"
           release_name: Release "${IMAGE_VERSION}"
