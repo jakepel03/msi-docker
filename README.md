@@ -50,7 +50,7 @@ Before proceeding with the steps below, ensure that you have Docker installed on
 - `MINIO_ROOT_USER`
 - `MINIO_ROOT_PASSWORD`
 
-If .env file is not present, default values will be used for those environmental variables.
+   If `.env` file is not present, default values will be used for those environmental variables.
   
 4. Run the following command to launch the VM:
 
