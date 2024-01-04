@@ -42,8 +42,17 @@ Before proceeding with the steps below, ensure that you have Docker installed on
     
    ![Screenshot from 2024-01-01 20-00-57](https://github.com/jakepel03/msi-docker/assets/69330734/907ac77a-26f9-4c6b-aa37-5fd662760573)
 
+
+3. (Optional) You can create an `.env` file in the root folder of the cloned repository and specify following environmental variables:
     
-3. Run the following command to launch the VM:
+- `POSTGRES_USER`
+- `POSTGRES_PASSWORD`
+- `MINIO_ROOT_USER`
+- `MINIO_ROOT_PASSWORD`
+
+If .env file is not present, default values will be used for those environmental variables.
+  
+4. Run the following command to launch the VM:
 
     ```bash
     docker compose up -d
@@ -53,7 +62,7 @@ Before proceeding with the steps below, ensure that you have Docker installed on
     Wait until containers are started.
 
 
-4. Once the containers are running, you can access the website on http://localhost
+5. Once the containers are running, you can access the website on http://localhost
 
 
    ![Screenshot from 2024-01-01 20-04-31](https://github.com/jakepel03/msi-docker/assets/69330734/4d50b13a-0f59-4f80-a940-aa04352bf65e)
