@@ -43,12 +43,13 @@ Before proceeding with the steps below, ensure that you have Docker installed on
    ![Screenshot from 2024-01-01 20-00-57](https://github.com/jakepel03/msi-docker/assets/69330734/907ac77a-26f9-4c6b-aa37-5fd662760573)
 
 
-3. (Optional) You can create an `.env` file in the root folder of the cloned repository and specify following environmental variables:
+3. (Optional) You can create an `.env` file in the root folder of the cloned repository and specify the following environmental variables:
     
 - `POSTGRES_USER`
 - `POSTGRES_PASSWORD`
 - `MINIO_ROOT_USER`
 - `MINIO_ROOT_PASSWORD`
+- `JWT_SECRET`
 
    If `.env` file is not present, default values will be used for those environmental variables.
   
